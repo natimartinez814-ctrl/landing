@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5f5f0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* SIN min-height: 100vh — eso causaba el espacio vacío */
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    /* Solo sombra en pantallas grandes */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.hero-section {
+    width: 100%;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Elimina cualquier espacio inferior que deja img */
+    vertical-align: bottom;
+}
+
+/* Área clickeable transparente sobre "El Borondo" */
+.clickable-area {
+    position: absolute;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 10;
+    background-color: transparent;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    /* En móvil táctil, agrandamos el área para facilitar el tap */
+    min-height: 44px;
+}
+
+/* Highlight al tocar/hover */
+.clickable-area:hover,
+.clickable-area:active {
+    background-color: rgba(212, 175, 55, 0.25);
+}
+
+/* Etiqueta visible SIEMPRE — no depende de hover */
+.hover-text {
+    position: absolute;
+    background: rgba(212, 175, 55, 0.95);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.hover-text::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(212, 175, 55, 0.95);
+}
+
+/* Posición sobre "El Borondo" en la imagen
+   La imagen es A4 vertical — "El Borondo" aparece ~88% del alto,
+   columna derecha ~40%-65% del ancho */
+.area-ubicacion {
+    top: 87%;
+    left: 40%;
+    width: 24%;
+    height: 4%;
+}
+
+/* ================================
+   DESKTOP con padding lateral
+================================ */
+@media (min-width: 601px) {
+    body {
+        padding: 20px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+    }
+
+    .container {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+}
+
+/* ================================
+   MÓVIL — ocupa todo el ancho,
+   sin padding, sin bordes
+================================ */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+        background: white;
+    }
+
+    .container {
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .hover-text {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}
