@@ -4,33 +4,29 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #f5f5f0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    /* SIN min-height: 100vh — eso causaba el espacio vacío */
+html, body {
+    width: 100%;
+    /* Sin height, sin min-height, sin flex — fluye naturalmente */
+    background: white;
 }
 
 .container {
     width: 100%;
     max-width: 600px;
+    margin: 0 auto;
     background: white;
-    /* Solo sombra en pantallas grandes */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
 }
 
 .hero-section {
     width: 100%;
     position: relative;
+    line-height: 0; /* Elimina espacio fantasma debajo de la img */
 }
 
 .hero-image {
     width: 100%;
     height: auto;
     display: block;
-    /* Elimina cualquier espacio inferior que deja img */
-    vertical-align: bottom;
 }
 
 /* Área clickeable transparente sobre "El Borondo" */
@@ -42,20 +38,18 @@ body {
     background-color: transparent;
     border-radius: 6px;
     transition: background-color 0.2s ease;
-    /* En móvil táctil, agrandamos el área para facilitar el tap */
-    min-height: 44px;
+    min-height: 44px; /* Mínimo táctil recomendado */
 }
 
-/* Highlight al tocar/hover */
 .clickable-area:hover,
 .clickable-area:active {
     background-color: rgba(212, 175, 55, 0.25);
 }
 
-/* Etiqueta visible SIEMPRE — no depende de hover */
+/* Tooltip siempre visible */
 .hover-text {
     position: absolute;
-    background: rgba(212, 175, 55, 0.95);
+    background: rgba(212, 175, 55, 0.97);
     color: white;
     padding: 5px 10px;
     border-radius: 6px;
@@ -79,12 +73,10 @@ body {
     transform: translateX(-50%);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid rgba(212, 175, 55, 0.95);
+    border-top: 5px solid rgba(212, 175, 55, 0.97);
 }
 
-/* Posición sobre "El Borondo" en la imagen
-   La imagen es A4 vertical — "El Borondo" aparece ~88% del alto,
-   columna derecha ~40%-65% del ancho */
+/* Posición sobre "El Borondo" */
 .area-ubicacion {
     top: 87%;
     left: 40%;
@@ -93,39 +85,17 @@ body {
 }
 
 /* ================================
-   DESKTOP con padding lateral
+   DESKTOP — agrega padding y estilo
 ================================ */
 @media (min-width: 601px) {
-    body {
-        padding: 20px;
-        min-height: 100vh;
+    html, body {
         background: linear-gradient(135deg, #f5f5f0 0%, #e8e8e0 100%);
+        padding: 20px;
     }
 
     .container {
         border-radius: 20px;
         overflow: hidden;
-    }
-}
-
-/* ================================
-   MÓVIL — ocupa todo el ancho,
-   sin padding, sin bordes
-================================ */
-@media (max-width: 600px) {
-    body {
-        padding: 0;
-        background: white;
-    }
-
-    .container {
-        max-width: 100%;
-        border-radius: 0;
-        box-shadow: none;
-    }
-
-    .hover-text {
-        font-size: 11px;
-        padding: 4px 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
     }
 }
